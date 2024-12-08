@@ -141,7 +141,7 @@ public class ImportAssetsFunc {
                 .isSuccess(false)
                 .status(HttpStatus.BAD_REQUEST)
                 .message("Có  " + returnValue.stream().filter(x -> !x.isSuccess()).count() + "/" + returnValue.size() + " dòng lỗi, vui lòng tải file xuống để xem chi tiết. Lưu ý: file chỉ tồn tại trong vòng 5 phút")
-                .data(excelFile)
+                .data(excelFile.toByteArray())
                 .build();
     }
 
