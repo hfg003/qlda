@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: qlda
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://139.180.140.74:5432/postgres
+    password: 123456a
+    username: cdtn
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+server:
+  port: 9191
