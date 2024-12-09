@@ -21,6 +21,7 @@ public class Liquidation {
     private String assetId;
     private String assetCode;
     private String assetName;
+    private String assetType;
     private long quantity;
     private Double liquidationPrice;
     private Date liquidationDate;

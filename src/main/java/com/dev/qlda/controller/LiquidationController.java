@@ -28,6 +28,7 @@ public class LiquidationController {
         Liquidation liquidation = MappingUtils.mapObject(request, Liquidation.class);
         liquidation.setId(UUID.randomUUID().toString());
         liquidation.setAssetName(request.getAssetName());
+        liquidation.setAssetType(asset.getType());
         return WrapResponse.ok("Them thong tin thanh ly tai san thanh cong", liquidationRepo.save(liquidation));
     }
 
@@ -46,6 +47,7 @@ public class LiquidationController {
         liquidation.setAssetName(asset.getName());
         liquidation.setAssetCode(request.getAssetCode());
         liquidation.setQuantity(request.getQuantity());
+        liquidation.setAssetType(asset.getType());
         return WrapResponse.ok("Them thong tin thanh ly tai san thanh cong", liquidationRepo.save(liquidation));
     }
 
