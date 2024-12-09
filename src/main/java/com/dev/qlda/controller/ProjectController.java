@@ -1,8 +1,10 @@
 package com.dev.qlda.controller;
 
 import com.dev.qlda.entity.Projects;
+import com.dev.qlda.entity.Users;
 import com.dev.qlda.model.ProjectProgress;
 import com.dev.qlda.repo.ProjectRepo;
+import com.dev.qlda.repo.UserRepo;
 import com.dev.qlda.request.CreateProjectsRequest;
 import com.dev.qlda.response.WrapResponse;
 import com.dev.qlda.utils.MappingUtils;
@@ -17,6 +19,7 @@ import java.util.UUID;
 @RequestMapping("/api/projects")
 public class ProjectController {
     private final ProjectRepo projectRepo;
+    private final UserRepo userRepo;
 
     @PostMapping("/create")
     public WrapResponse<?> create(@RequestBody CreateProjectsRequest request){
@@ -31,11 +34,17 @@ public class ProjectController {
         if (projects != null) {
             return WrapResponse.error("Du an khong ton tai");
         }
+        Users users = userRepo.findByDepartment("QUAN LY DU AN");
+        if (users == null) {
+            users = Users.builder().id("VANG LAI").fullName("VANG LAI").build();
+        }
         projects.setName(request.getName());
         projects.setPrice(request.getPrice());
         projects.setStatus(request.getStatus());
         projects.setStartDate(request.getStartDate());
         projects.setEndDate(request.getEndDate());
+        projects.setTakeChargeId(users.getId());
+        projects.setTakeChargeName(users.getFullName());
         return WrapResponse.ok("Cap nhat thong tin du an thanh cong", projectRepo.save(projects));
     }
 

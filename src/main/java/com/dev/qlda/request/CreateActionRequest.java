@@ -11,7 +11,7 @@ import lombok.Setter;
 @Setter
 public class CreateActionRequest {
     private String assetCode;
-    private String quantity;
+    private Long quantity;
     private String reason;
     private String action;
     private String assignee;

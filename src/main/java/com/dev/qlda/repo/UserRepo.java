@@ -14,4 +14,6 @@ public interface UserRepo extends JpaRepository<Users, String> {
 
     @Query("select u from Users u")
     Page<Users> getUsersInPage(Pageable pageable);
+
+    Users findByDepartment(String department);
 }

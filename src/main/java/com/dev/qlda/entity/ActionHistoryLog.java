@@ -21,7 +21,7 @@ public class ActionHistoryLog {
     private String assetCode;
     private String assetType;
     private String assetName;
-    private String quantity;
+    private Long quantity;
     private String reason;
     private String action;
     private Date actionDate;

@@ -24,4 +24,6 @@ public class AssetQuantity {
     private String location;
     @Builder.Default
     private Long quantity = 0L;
+    private String takeChargeName;
+    private String takeChargeId;
 }

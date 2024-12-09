@@ -31,6 +31,8 @@ public class Projects {
     private Date endDate;
     private Double realPrice;
     private String status;
+    private String takeChargeName;
+    private String takeChargeId;
 
     @Column(columnDefinition = "jsonb")
     @Type(type = "jsonb")

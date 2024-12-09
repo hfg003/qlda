@@ -3,9 +3,11 @@ package com.dev.qlda.controller;
 import com.dev.qlda.entity.AssetQuantity;
 import com.dev.qlda.entity.Assets;
 import com.dev.qlda.entity.Transfers;
+import com.dev.qlda.entity.Users;
 import com.dev.qlda.function.ImportAssetsFunc;
 import com.dev.qlda.repo.AssetQuantityRepo;
 import com.dev.qlda.repo.AssetRepo;
+import com.dev.qlda.repo.UserRepo;
 import com.dev.qlda.request.CreateAssetRequest;
 import com.dev.qlda.response.WrapResponse;
 import com.dev.qlda.utils.CodeGenerators;
@@ -30,6 +32,7 @@ public class AssetController {
     private final CodeGenerators codeGenerators;
     private final ImportAssetsFunc importAssetsFunc;
     private final AssetQuantityRepo assetQuantityRepo;
+    private final UserRepo userRepo;
 
     @PostMapping("/create")
     public WrapResponse<?> createAssets(@RequestBody CreateAssetRequest request) {
@@ -91,8 +94,15 @@ public class AssetController {
 
     public void createAssetQuantity(List<Assets> assets){
         List<AssetQuantity> saveList = new ArrayList<>();
-        for (String department : List.of("NHA K", "NHA B", "NHA HIEU BO", "NHA C", "NHA D", "NHA V", "SAN VAN DONG", "KHO")){
+        for (String department : List.of("NHA K", "NHA B", "NHA HIEU BO", "NHA C", "NHA D", "NHA V", "SAN VAN DONG", "KHO", "QUAN LY DU AN", "QUAN LY SUA CHUA")){
             for (Assets asset : assets){
+                if (department.equals("KHO") || department.equals("QUAN LY DU AN") || department.equals("QUAN LY SUA CHUA")){
+                    continue;
+                }
+                Users users = userRepo.findByDepartment(department);
+                if (users == null) {
+                    users = Users.builder().id("VANG LAI").fullName("VANG LAI").build();
+                }
                 saveList.add(AssetQuantity.builder()
                                 .id(UUID.randomUUID().toString())
                                 .assetId(asset.getId())
@@ -101,6 +111,8 @@ public class AssetController {
                                 .assetType(asset.getType())
                                 .manufacturer(asset.getManufacturer())
                                 .quantity(0L)
+                                .takeChargeId(users.getId())
+                                .takeChargeName(users.getFullName())
                         .location(department)
                         .build());
             }
