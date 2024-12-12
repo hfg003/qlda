@@ -17,7 +17,7 @@ import java.util.HashMap;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/auth")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3010")
 public class AuthController {
 
     private final UserRepo userRepo;

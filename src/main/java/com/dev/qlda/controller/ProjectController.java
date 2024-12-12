@@ -16,7 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3010")
 @RequestMapping("/api/projects")
 public class ProjectController {
     private final ProjectRepo projectRepo;

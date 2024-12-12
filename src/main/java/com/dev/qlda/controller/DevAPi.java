@@ -12,7 +12,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/dev/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3010")
 public class DevAPi {
     private final UserRepo userRepo;
     private final PasswordEncoder passwordEncoder;

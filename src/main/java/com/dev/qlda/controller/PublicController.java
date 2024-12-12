@@ -11,7 +11,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/public/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3010")
 @RequiredArgsConstructor
 public class PublicController {
     private final RoleRepo roleRepo;

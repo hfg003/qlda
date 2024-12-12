@@ -16,7 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/asset/quantity")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3010")
 public class AssetQuantityController {
     private final AssetQuantityRepo assetQuantityRepo;
 

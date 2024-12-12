@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/contact")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3010")
 @RequiredArgsConstructor
 public class ContactSupportController {
     private final ContactSupportRepo contactSupportRepo;

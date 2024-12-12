@@ -15,7 +15,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/liquidation")
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:3010")
 public class LiquidationController {
     private final LiquidationRepo liquidationRepo;
     private final AssetRepo assetRepo;

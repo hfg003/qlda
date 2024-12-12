@@ -30,12 +30,19 @@ public class AuthenticationFilter {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(request -> {
                     var corsConfig = new CorsConfiguration();
-                    corsConfig.setAllowedOrigins(List.of("*"));
+                    corsConfig.addAllowedOrigin("http://localhost:3010");
                     corsConfig.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
                     corsConfig.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
                     corsConfig.setAllowCredentials(true);
                     return corsConfig;
                 }))
+                .authorizeHttpRequests(r -> r
+                        .antMatchers("/api/auth/**").permitAll()
+                        .antMatchers("/public/**").permitAll()
+                        .antMatchers("/dev/api/**").permitAll()
+                        .antMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
+                )
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
