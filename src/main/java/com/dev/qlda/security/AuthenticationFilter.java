@@ -13,6 +13,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -22,11 +23,18 @@ public class AuthenticationFilter {
     private final UserSessionDetail userSessionDetail;
     private final PasswordEncoderConfig pe;
 
-    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(AbstractHttpConfigurer::disable)
-                .cors(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(r -> r.antMatchers("/api/auth/**").permitAll()
+        http
+                .csrf(AbstractHttpConfigurer::disable)
+                .cors(cors -> cors.configurationSource(request -> {
+                    CorsConfiguration config = new CorsConfiguration();
+                    config.addAllowedOrigin("*");
+                    config.addAllowedMethod("*");
+                    config.addAllowedHeader("*");
+                    return config;
+                }))
+                .authorizeHttpRequests(r -> r
+                        .antMatchers("/api/auth/**").permitAll()
                         .antMatchers("/public/**").permitAll()
                         .antMatchers("/dev/api/**").permitAll()
                         .antMatchers("/admin/**").hasRole("ADMIN")
@@ -35,8 +43,8 @@ public class AuthenticationFilter {
                 .sessionManagement(manager -> manager.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider())
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-        return http.build();
 
+        return http.build();
     }
 
     @Bean
