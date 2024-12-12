@@ -5,9 +5,12 @@ import com.dev.qlda.repo.DepartmentRepo;
  import com.dev.qlda.response.WrapResponse;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -17,11 +20,12 @@ public class DepartmentController {
     private final DepartmentRepo departmentRepo;
 
     @PostMapping("/create")
-    public WrapResponse<?> create(@RequestBody String name) {
-        if (StringUtils.isBlank(name)){
+    public WrapResponse<?> create(@RequestBody List<String> names) {
+        if (CollectionUtils.isEmpty(names)){
             return WrapResponse.error("khong duoc de trong ten phong ban lam viec");
         }
-        return WrapResponse.ok(departmentRepo.save(Departments.builder().id(UUID.randomUUID().toString()).name(name).build()));
+        List<Departments> departments = names.stream().map(x -> new Departments(UUID.randomUUID().toString(), x)).toList();
+        return WrapResponse.ok(departmentRepo.saveAll(departments));
     }
 
     @PostMapping("/update/{id}")
