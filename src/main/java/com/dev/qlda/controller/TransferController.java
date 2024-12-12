@@ -20,6 +20,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/transfer")
+@CrossOrigin(origins = "*")
 public class TransferController {
 
     private final TransferRepo transferRepo;

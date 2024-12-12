@@ -4,6 +4,7 @@ import com.dev.qlda.entity.AssetQuantity;
 import com.dev.qlda.repo.AssetQuantityRepo;
 import com.dev.qlda.response.WrapResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +16,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/asset/quantity")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class AssetQuantityController {
     private final AssetQuantityRepo assetQuantityRepo;
 

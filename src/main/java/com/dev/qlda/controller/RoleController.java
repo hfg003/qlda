@@ -12,6 +12,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/role")
+@CrossOrigin(origins = "*")
 public class RoleController {
 
     private final RoleRepo roleRepo;

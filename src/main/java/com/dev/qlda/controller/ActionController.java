@@ -18,6 +18,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/api/action")
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 public class ActionController {
     private final ActionRepo actionRepo;
     private final AssetRepo assetRepo;

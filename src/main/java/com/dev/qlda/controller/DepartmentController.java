@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/department")
+@CrossOrigin(origins = "*")
 public class DepartmentController {
 
     private final DepartmentRepo departmentRepo;

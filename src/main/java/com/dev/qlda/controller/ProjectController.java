@@ -16,6 +16,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/projects")
 public class ProjectController {
     private final ProjectRepo projectRepo;

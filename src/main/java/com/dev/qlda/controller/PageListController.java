@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/page")
+@CrossOrigin(origins = "*")
 public class PageListController {
     private final UserRepo userRepo;
     private final AssetRepo assetRepo;
